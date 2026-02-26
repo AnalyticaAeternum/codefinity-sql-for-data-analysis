@@ -1,0 +1,10 @@
+SELECT
+  sale_date,
+  SUM(total_amount) AS daily_total,
+  SUM(SUM(total_amount)) OVER (ORDER BY sale_date) AS running_total
+FROM
+  sales
+GROUP BY
+  sale_date
+ORDER BY
+  sale_date;
