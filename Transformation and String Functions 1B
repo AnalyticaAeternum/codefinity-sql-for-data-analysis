@@ -1,0 +1,9 @@
+-- Group customers by the year they made their first purchase
+SELECT
+  c.customer_id,
+  c.first_name,
+  c.last_name,
+  DATE_PART('year', s.sale_date) AS signup_year
+FROM customers c
+JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name, s.sale_date;
