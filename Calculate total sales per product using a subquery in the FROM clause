@@ -1,0 +1,9 @@
+-- Calculate total sales per product using a subquery in the FROM clause
+SELECT p.product_id, p.product_name, sales_totals.total_sales
+FROM products p
+JOIN (
+    SELECT product_id, SUM(total_amount) AS total_sales
+    FROM sales
+    GROUP BY product_id
+) AS sales_totals
+ON p.product_id = sales_totals.product_id;
