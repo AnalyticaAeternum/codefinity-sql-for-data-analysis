@@ -1,0 +1,12 @@
+SELECT c.customer_id, c.first_name, c.last_name, SUM(s.total_amount) AS total_purchases
+FROM customers c
+JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name
+HAVING SUM(s.total_amount) > (
+    SELECT AVG(total_purchases)
+    FROM (
+        SELECT SUM(total_amount) AS total_purchases
+        FROM sales
+        GROUP BY customer_id
+    ) AS customer_totals
+);
