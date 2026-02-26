@@ -1,0 +1,5 @@
+-- Format customer names: uppercase last name, extract first initial
+SELECT
+  UPPER(last_name) AS last_name_upper,
+  SUBSTRING(first_name, 1, 1) AS first_initial
+FROM customers;
